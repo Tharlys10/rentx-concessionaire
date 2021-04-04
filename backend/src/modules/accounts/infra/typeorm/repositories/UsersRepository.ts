@@ -27,9 +27,9 @@ class UsersRepository implements IUsersRepository {
       avatar
     })
 
-    const userCreate = await this.repository.save(user);
+    await this.repository.save(user);
 
-    return userCreate;
+    return user;
   }
 
   async findByEmail(email: string): Promise<User> {

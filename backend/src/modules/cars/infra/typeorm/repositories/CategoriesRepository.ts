@@ -27,9 +27,9 @@ class CategoriesRepository implements ICategoriesRepository {
       description
     });
 
-    const categoryCreate = await this.repository.save(category);
+    await this.repository.save(category);
 
-    return categoryCreate;
+    return category;
   }
 }
 
