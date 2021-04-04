@@ -13,7 +13,7 @@ describe("Create Car", () => {
 
   it("Should be able to create a new car", async () => {
     const car = await createCarUseCase.execute({
-      category_id: "category",
+      category_id: "aa000a00-000a-0a0a-00a0-0a0a000a0a0",
       name: "New Car",
       description: "Description Car",
       daily_rate: 100,
@@ -28,7 +28,7 @@ describe("Create Car", () => {
   it("Should be able to create a new car with exists license plate", async () => {
     expect(async () => {
       await createCarUseCase.execute({
-        category_id: "category",
+        category_id: "aa000a00-000a-0a0a-00a0-0a0a000a0a0",
         name: "New Car One",
         description: "Description Car One",
         daily_rate: 100,
@@ -51,7 +51,7 @@ describe("Create Car", () => {
 
   it("Should be able to create a new car with available true by default", async () => {
     const car = await createCarUseCase.execute({
-      category_id: "category",
+      category_id: "aa000a00-000a-0a0a-00a0-0a0a000a0a0",
       name: "New Car Available",
       description: "Description Car",
       daily_rate: 150,
