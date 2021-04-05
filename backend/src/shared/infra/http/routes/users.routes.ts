@@ -3,8 +3,8 @@ import multer from "multer";
 
 import { ensureAuthentication } from "@shared/infra/http/middlewares/ensureAuthentication";
 
-import { CreateUserController } from "@modules/accounts/UseCases/createUser/CreateUserController";
-import { UpdateUserAvatarController } from "@modules/accounts/UseCases/updateUserAvatar/UpdateUserAvatarController";
+import { CreateUserController } from "@modules/accounts/useCases/createUser/CreateUserController";
+import { UpdateUserAvatarController } from "@modules/accounts/useCases/updateUserAvatar/UpdateUserAvatarController";
 
 import uploadConfig from "@config/upload";
 
