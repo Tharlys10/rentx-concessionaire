@@ -2,13 +2,50 @@
   "openapi": "3.0.0",
   "info": {
     "title": "RentX Documentation",
-    "description": "This is an API Rent",
+    "description": "This is an API RentX",
     "version": "1.0.0",
     "contact": {
       "email": "tharlys2015c@gmail.com"
     }
   },
   "paths": {
+    "/session": {
+      "post": {
+        "tags": [
+          "Session"
+        ],
+        "summary": "Create a session user",
+        "description": "Create new a session user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Email or password incorrect!"
+          },
+          "500": {
+            "description": "Internal server error!"
+          }
+        }
+      }
+    },
     "/categories": {
       "post": {
         "tags": [
@@ -16,6 +53,11 @@
         ],
         "summary": "Create a category",
         "description": "Create new a category",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -90,6 +132,11 @@
         ],
         "summary": "Upload a new category",
         "description": "Upload a new category",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -119,6 +166,11 @@
         ],
         "summary": "Create a specification",
         "description": "Create new a specification",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -141,6 +193,90 @@
           }
         }
       }
+    },
+    "/cars": {
+      "post": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Create a new car",
+        "description": "Create a new car",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Car"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created!"
+          },
+          "400": {
+            "description": "Car already exist!"
+          },
+          "500": {
+            "description": "Internal server error!"
+          }
+        }
+      }
+    },
+    "cars/image/{id}": {
+      "post": {
+        "tags": [
+          "Cars"
+        ],
+        "summary": "Update images car",
+        "description": "Update images",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created!"
+          },
+          "500": {
+            "description": "Internal server error!"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -153,6 +289,41 @@
         "description": {
           "type": "string"
         }
+      }
+    },
+    "Car": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "daily_rate": {
+          "type": "number"
+        },
+        "license_plate": {
+          "type": "string"
+        },
+        "fine_amount": {
+          "type": "number"
+        },
+        "brand": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
