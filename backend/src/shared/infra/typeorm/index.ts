@@ -10,7 +10,7 @@ export default async (host = "database"): Promise<Connection> => {
   return createConnection(
     Object.assign(defaultOptions, {
       host: process.env.NODE_ENV === 'test' ? '172.22.0.2' : host,
-      database: process.env.NODE_ENV === 'test' ? 'rentx_text' : defaultOptions.database
+      database: process.env.NODE_ENV === 'test' ? 'rentx_test' : defaultOptions.database
     })
   )
 }

@@ -33,8 +33,6 @@ describe("Create Category Controller", () => {
     await connection.close();
   })
 
-  const name = faker.name.findName();
-  const description = faker.lorem.paragraph()
 
   it("Should be able to create a new category", async () => {
     const responseToken = await request(app)
@@ -49,8 +47,8 @@ describe("Create Category Controller", () => {
     const response = await request(app)
       .post("/categories")
       .send({
-        name,
-        description
+        name: "Test category",
+        description: "Description a new category"
       })
       .set({
         Authorization: `Bearer ${token}`
@@ -72,8 +70,8 @@ describe("Create Category Controller", () => {
     const response = await request(app)
       .post("/categories")
       .send({
-        name,
-        description
+        name: "Test category",
+        description: "Description a new category"
       })
       .set({
         Authorization: `Bearer ${token}`
