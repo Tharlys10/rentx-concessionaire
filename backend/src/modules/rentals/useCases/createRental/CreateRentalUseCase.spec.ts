@@ -4,8 +4,10 @@ import { RentalsRepositoryInMemory } from "@modules/rentals/repositories/in-Memo
 import { AppError } from "@shared/errors/AppError";
 import { CreateRentalUseCase } from "./CreateRentalUseCase";
 import { DayjsDateProvider } from "@shared/container/providers/DateProvider/implementations/DayjsDateProvider";
+import { CarsRepositoryInMemory } from "@modules/cars/repositories/in-memory/CarsRepositoryInMemory";
 
 let rentalsRepositoryInMemory: RentalsRepositoryInMemory;
+let carsRepositoryInMemory: CarsRepositoryInMemory;
 let createRentalUseCase: CreateRentalUseCase;
 let dayjsDateProvider: DayjsDateProvider;
 
@@ -15,11 +17,23 @@ describe("Create Rental", () => {
 
   beforeEach(() => {
     rentalsRepositoryInMemory = new RentalsRepositoryInMemory();
+    carsRepositoryInMemory = new CarsRepositoryInMemory();
     dayjsDateProvider = new DayjsDateProvider();
-    createRentalUseCase = new CreateRentalUseCase(rentalsRepositoryInMemory, dayjsDateProvider);
+    createRentalUseCase = new CreateRentalUseCase(rentalsRepositoryInMemory, carsRepositoryInMemory, dayjsDateProvider);
   });
 
   it("Should be able to create a new rental", async () => {
+    await carsRepositoryInMemory.create({
+      id: "bb000b00-000b-0b0b-00b0-0b0b000b0b0",
+      category_id: "bb000b00-000b-0b0b-00b0-0b0b000b0b0",
+      name: "Car test",
+      description: "Description car test",
+      daily_rate: 450,
+      fine_amount: 80,
+      license_plate: "ATT-1564",
+      brand: "Test"
+    })
+
     const rental = await createRentalUseCase.execute({
       user_id: "aa000a00-000a-0a0a-00a0-0a0a000a0a0",
       car_id: "bb000b00-000b-0b0b-00b0-0b0b000b0b0",

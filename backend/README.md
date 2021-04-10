@@ -51,3 +51,18 @@
 * Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo usuário.
 * Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo carro.
 * O usuário deve está logado.
+* Ao realiazar um aluguel, o status do carro deverá ser alterado para indisponivel.
+
+# Devolução de carro
+
+**RF**
+* Deve ser possível realizar a devolução de um carro.
+
+**RN**
+* Se o carro for devolvido com menos de 24 horas, deverá ser cobrado diária complesta.
+* Ao realizar a devolução, o carro deverá ser liberado para outro alguel.
+* Ao realizar a devolução, o usuário deverá ser liberado para outro alguel.
+* Ao realizar a devolução, deverá ser calculado o total do alguel.
+* Caso o horário de devolução seja superiro ao horário previsto de entrega, deverá ser cobrado multa proporcional aos dias de atraso.
+* Case haja multa, deverá ser somado ao total do aluguel.
+* Deve ser possível cadastrar um aluguel.
