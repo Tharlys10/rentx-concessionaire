@@ -13,7 +13,7 @@ let dayjsDateProvider: DayjsDateProvider;
 
 describe("Create Rental", () => {
 
-  const dayAdd2Days = dayjs().add(2, "day").toDate();
+  const dayAdd2Days = dayjs().add(2, "days").toDate();
 
   beforeEach(() => {
     rentalsRepositoryInMemory = new RentalsRepositoryInMemory();
