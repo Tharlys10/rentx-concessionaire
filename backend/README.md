@@ -66,3 +66,11 @@
 * Caso o horário de devolução seja superiro ao horário previsto de entrega, deverá ser cobrado multa proporcional aos dias de atraso.
 * Case haja multa, deverá ser somado ao total do aluguel.
 * Deve ser possível cadastrar um aluguel.
+
+# Listagem de alugues para o usuário
+
+**RF**
+* Deve ser possível realizar a busca de todos os alugueis para o usuário.
+
+**RN**
+* O usuário deve está logado.
