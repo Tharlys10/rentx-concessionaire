@@ -22,17 +22,16 @@ describe("Create Category", () => {
     expect(category).toHaveProperty("id");
   });
 
-  it("Should not be able to create a new category with name exist", async () => {
-    expect(async () => {
-      await createCategoryUseCase.execute({
-        name: "Category test",
-        description: "Category description test"
-      });
+  it("Should not be able to create a new category with name exists", async () => {
+    await createCategoryUseCase.execute({
+      name: "Category test",
+      description: "Category description test"
+    });
 
-      await createCategoryUseCase.execute({
-        name: "Category test",
-        description: "Category description test"
-      });
-    }).rejects.toBeInstanceOf(AppError);
+    await expect(createCategoryUseCase.execute({
+      name: "Category test",
+      description: "Category description test"
+    })
+    ).rejects.toEqual(new AppError("Category already exist!"))
   });
 })
