@@ -42,7 +42,8 @@ describe("List Category Controller", () => {
         password: "admin"
       });
 
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
+
     const name = faker.name.findName()
 
     await request(app)
@@ -52,13 +53,13 @@ describe("List Category Controller", () => {
         description: faker.lorem.paragraph()
       })
       .set({
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${refresh_token}`
       });
 
     const response = await request(app)
       .get("/categories")
       .set({
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${refresh_token}`
       });
 
     expect(response.status).toBe(200);
