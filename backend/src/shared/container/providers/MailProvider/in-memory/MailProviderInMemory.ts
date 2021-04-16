@@ -11,8 +11,6 @@ class MailProviderInMemory implements IMailProvider {
       variables,
       path
     });
-
-    console.log("Mail send");
   }
 }
 
