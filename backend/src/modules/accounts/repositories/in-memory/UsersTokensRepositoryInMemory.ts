@@ -33,3 +33,5 @@ class UsersTokensRepositoryInMemory implements IUsersTokensRepository {
     return this.usersToken.find(userToken => userToken.refresh_token === refresh_token)
   }
 }
+
+export { UsersTokensRepositoryInMemory }

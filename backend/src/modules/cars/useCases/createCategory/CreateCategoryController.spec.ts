@@ -23,7 +23,7 @@ describe("Create Category Controller", () => {
       `INSERT INTO users 
         (id, name, email, password, driver_license, is_admin, created_at) 
         VALUES
-        ('${id}', 'admin', 'admin@rentex.com.br', '${password}', 'XXXXXX', true, 'now()')
+        ('${id}', 'admin', 'admin@rentx.com.br', '${password}', 'XXXXXX', true, 'now()')
       `
     );
   })
@@ -38,11 +38,11 @@ describe("Create Category Controller", () => {
     const responseToken = await request(app)
       .post("/session")
       .send({
-        email: "admin@rentex.com.br",
+        email: "admin@rentx.com.br",
         password: "admin"
       });
 
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
 
     const response = await request(app)
       .post("/categories")
@@ -51,8 +51,9 @@ describe("Create Category Controller", () => {
         description: "Description a new category"
       })
       .set({
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${refresh_token}`
       });
+
 
     expect(response.status).toBe(201);
   });
@@ -61,11 +62,11 @@ describe("Create Category Controller", () => {
     const responseToken = await request(app)
       .post("/session")
       .send({
-        email: "admin@rentex.com.br",
+        email: "admin@rentx.com.br",
         password: "admin"
       });
 
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
 
     const response = await request(app)
       .post("/categories")
@@ -74,7 +75,7 @@ describe("Create Category Controller", () => {
         description: "Description a new category"
       })
       .set({
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${refresh_token}`
       });
 
     expect(response.status).toBe(400);

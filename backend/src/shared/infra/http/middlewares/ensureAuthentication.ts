@@ -29,7 +29,7 @@ export async function ensureAuthentication(request: Request, response: Response,
     }
 
     request.user = {
-      id: user.id
+      id: user.user_id
     }
 
     next();
