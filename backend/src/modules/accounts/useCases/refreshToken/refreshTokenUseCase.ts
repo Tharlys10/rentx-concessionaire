@@ -1,7 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { sign, verify } from "jsonwebtoken"
 import auth from "@config/auth";
-import { UserTokens } from "@modules/accounts/infra/typeorm/entities/UserTokens";
 import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
 import { AppError } from "@shared/errors/AppError";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
@@ -12,7 +11,8 @@ interface IPayload {
 }
 
 interface IResponse {
-  refresh_token: string
+  token: string;
+  refresh_token: string;
 }
 
 @injectable()
@@ -25,7 +25,7 @@ class RefreshTokenUseCase {
   ) { }
 
   async execute(token: string): Promise<IResponse> {
-    const { secret_refresh_token, expires_in_refresh_token, expires_refresh_token_days } = auth;
+    const { secret_refresh_token, expires_in_refresh_token, expires_refresh_token_days, secret_token, expires_in_token } = auth;
 
     const { email, sub } = verify(token, secret_refresh_token) as IPayload;
 
@@ -50,9 +50,15 @@ class RefreshTokenUseCase {
       user_id,
       refresh_token,
       expires_date: refresh_token_expires_date,
-    })
+    });
+
+    const tokenUser = sign({}, secret_token, {
+      subject: user_id,
+      expiresIn: expires_in_token
+    });
 
     const refreshResponse: IResponse = {
+      token: tokenUser,
       refresh_token
     }
 
