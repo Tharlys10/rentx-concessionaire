@@ -24,5 +24,4 @@ Global
 * APP_API_URL=
 * APP_PORT=
 * FORGOT_MAIL_URL=
-
-DISK=local
+* DISK=local | s3
