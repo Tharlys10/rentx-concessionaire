@@ -19,9 +19,11 @@ AWS Credentials
 * AWS_BUCKET=
 * AWS_BUCKET_REGION=
 * AWS_BUCKET_URL=
+* AWS_REGION=
 
 Global
 * APP_API_URL=
 * APP_PORT=
 * FORGOT_MAIL_URL=
 * DISK=local | s3
+* MAIL_PROVIDER=ethereal | ses
