@@ -13,7 +13,7 @@ Concessionária de carros Rentex
 
 #### Variaveis de ambiente 
 
-* AWS Credentials
+AWS Credentials
 * AWS_ACCESS_KEY_ID=
 * AWS_SECRET_ACCESS_KEY=
 * AWS_BUCKET=
@@ -21,8 +21,8 @@ Concessionária de carros Rentex
 * AWS_BUCKET_URL=
 
 Global
-* APP_API_URL=http://localhost:3333
-* APP_PORT=3333
-* FORGOT_MAIL_URL=http://localhost:3333/password/reset?token=
+* APP_API_URL=
+* APP_PORT=
+* FORGOT_MAIL_URL=
 
 DISK=local
