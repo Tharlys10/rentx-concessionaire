@@ -2,3 +2,7 @@ node_modules
 .vscode
 
 coverage
+
+/tmp/avatar/
+
+.env
