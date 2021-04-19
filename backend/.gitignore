@@ -3,7 +3,10 @@ node_modules
 
 coverage
 
-/tmp/avatar/
-/tmp/cars/
+dist
+
+tmp/*
+!/tmp/avatar/.gitkeep
+!/tmp/cars/.gitkeep
 
 .env
