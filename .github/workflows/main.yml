@@ -21,10 +21,10 @@ jobs:
           node-version: 14.x
       
       - name: Install Dependencies
-        run: yarn
+        run: cd backend && yarn
       
       - name: Build
-        run: yarn build
+        run: cd backend && yarn build
         
       - uses: appleboy/scp-action@master
         with:
