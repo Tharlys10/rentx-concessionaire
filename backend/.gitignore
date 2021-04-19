@@ -10,3 +10,5 @@ tmp/*
 !/tmp/cars/.gitkeep
 
 .env
+
+ormconfig.json
