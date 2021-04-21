@@ -9,7 +9,7 @@ on:
 jobs:
   deploy:
     name: Upping to server
-    runs-on: Test
+    runs-on: test
     steps:
       - uses: actions/checkout@v2
 
