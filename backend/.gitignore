@@ -11,4 +11,4 @@ tmp/*
 
 # .env
 
-ormconfig.json
+# ormconfig.json
