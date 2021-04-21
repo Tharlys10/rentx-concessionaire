@@ -7,10 +7,17 @@ on:
     branches: [ develop ]
 
 jobs:
-   deploy:
+  deploy:
     name: Upping to server
     runs-on: test
     steps:
-      - name: Deploying on test server
-        uses: actions/checkout@v2
-      - run: docker-compose -f docker-compose.yml build --no-cache --force-rm && docker-compose -f docker-compose.yml up -d && docker image prune -a -f
+      - uses: actions/checkout@v2
+
+      - name: Build Image
+        run: docker-compose -f docker-compose.yml build --no-cache --force-rm
+
+      - name: Update Image
+        run: docker-compose -f docker-compose.yml up -d 
+
+      - name: Cleanup
+        run: docker image prune -a -f
