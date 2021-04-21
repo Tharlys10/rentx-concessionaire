@@ -6,12 +6,10 @@ on:
   pull_request:
     branches: [ develop ]
 
-  workflow_dispatch:
-
 jobs:
   deploy:
     name: Upping to server
-    runs-on: Upping
+    runs-on: Test
     steps:
       - uses: actions/checkout@v2
 
