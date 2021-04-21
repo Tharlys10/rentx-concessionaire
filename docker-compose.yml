@@ -1,0 +1,50 @@
+version: "3.7"
+
+services: 
+  database:
+    image: postgres
+    container_name: database_rentx
+    restart: always
+    environment: 
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=ignite
+      - POSTGRES_DB=rentx
+    volumes: 
+      - pgdata:/data/postgres
+    expose:
+      - '5432'
+    networks:
+      - rentx
+
+  server:
+    build: ./backend
+    image: rentxserver
+    container_name: rentxserver
+    restart: always
+    # ENVS
+    expose:
+      - '3333'
+    depends_on: 
+      - database
+    networks:
+      - rentx
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.rentxserver.rule=Host(`apps.tharlysalves.online`) && PathPrefix(`/rentxserver`)"
+      - "traefik.http.routers.rentxserver.entrypoints=websecure"
+      - "traefik.http.routers.rentxserver.tls.certresolver=apps-ssl-resolver"
+      - "traefik.http.routers.rentxserver.service=rentxserver"
+      - "traefik.http.services.rentxserver.loadbalancer.server.port=3333"
+
+volumes: 
+  pgdata:
+    driver: local
+
+networks:
+  proxy:
+    external:
+      name: proxy
+  rentx:
+    name: rentx-network
