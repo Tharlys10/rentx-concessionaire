@@ -5,19 +5,45 @@ on:
     branches: [ develop ]
   pull_request:
     branches: [ develop ]
+    
+ workflow_dispatch:
 
 jobs:
-  deploy:
-    name: Upping to server
-    runs-on: test
+  build:
+    runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
-
-      - name: Build Image
-        run: docker-compose -f docker-compose.yml build --build-arg AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} --build-arg AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}  --no-cache --force-rm 
-
-      - name: Update Image
-        run: docker-compose -f docker-compose.yml up -d 
-
-      - name: Cleanup
-        run: docker image prune -a -f
+      
+      - name: Setup NodeJS
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+      
+      - name: Install Dependencies
+        run: cd backend && yarn
+      
+      - name: Build
+        run: cd backend && yarn build
+      
+      - name: Copy File Via SSH Password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "., !node_modules"
+          target: "app/rentex-concessionaire"
+          
+      - name: Update API
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/app/rentex-concessionaire/backend
+            yarn
+            ./node_modules/.bin/typeorm migration:run
