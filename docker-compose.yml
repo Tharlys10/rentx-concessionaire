@@ -32,7 +32,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
-      - "traefik.http.routers.rentxserver.rule=Host(`apps.tharlysalves.online`) && PathPrefix(`/rentxserver`)"
+      - "traefik.http.routers.rentxserver.rule=Host(`app.tharlysalves.online`) && PathPrefix(`/rentxserver`)"
       - "traefik.http.routers.rentxserver.entrypoints=websecure"
       - "traefik.http.routers.rentxserver.tls.certresolver=apps-ssl-resolver"
       - "traefik.http.routers.rentxserver.service=rentxserver"
