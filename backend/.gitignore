@@ -9,6 +9,6 @@ tmp/*
 !/tmp/avatar/.gitkeep
 !/tmp/cars/.gitkeep
 
-.env
+# .env
 
 # ormconfig.json
