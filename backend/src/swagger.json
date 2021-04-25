@@ -9,7 +9,7 @@
     }
   },
   "paths": {
-    "/session": {
+    "/rentxserver/session": {
       "post": {
         "tags": [
           "Session"
@@ -46,7 +46,7 @@
         }
       }
     },
-    "/categories": {
+    "/rentxserver/categories": {
       "post": {
         "tags": [
           "Categories"
@@ -125,7 +125,7 @@
         }
       }
     },
-    "/categories/import": {
+    "/rentxserver/categories/import": {
       "post": {
         "tags": [
           "Categories"
@@ -159,7 +159,7 @@
         }
       }
     },
-    "/specifications": {
+    "/rentxserver/specifications": {
       "post": {
         "tags": [
           "Specifications"
@@ -194,7 +194,7 @@
         }
       }
     },
-    "/cars": {
+    "/rentxserver/cars": {
       "post": {
         "tags": [
           "Cars"
@@ -228,7 +228,7 @@
         }
       }
     },
-    "cars/image/{id}": {
+    "/rentxserver/cars/image/{id}": {
       "post": {
         "tags": [
           "Cars"
