@@ -2,7 +2,8 @@ version: "3.7"
 
 services: 
   database:
-    image: postgres
+    build: ./database
+    image: rentx/database
     container_name: rentxdatabase
     restart: always
     expose:
@@ -12,13 +13,13 @@ services:
       - POSTGRES_PASSWORD=ignite
       - POSTGRES_DB=rentx
     volumes: 
-      - pgdata:/data/postgres
+      - pgdata:/var/lib/postgresql/data
     networks:
       - rentx
 
   server:
     build: ./backend
-    image: rentxserver
+    image: rentx/server
     container_name: rentxserver
     restart: always
     expose: 
@@ -39,7 +40,7 @@ services:
 
 volumes: 
   pgdata:
-    driver: local
+    name: rentxdatabase
 
 networks:
   proxy:
