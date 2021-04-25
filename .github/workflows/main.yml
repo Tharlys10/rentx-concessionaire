@@ -15,16 +15,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Setup NodeJS
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14.x
+      # - name: Setup NodeJS
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: 14.x
       
-      - name: Install Dependencies
-        run: cd backend && yarn
+      # - name: Install Dependencies
+      #   run: cd backend && yarn
       
-      - name: Build
-        run: cd backend && yarn build
+      # - name: Build
+      #   run: cd backend && yarn build
       
       - name: Copy File Via SSH Password
         uses: appleboy/scp-action@master
@@ -34,7 +34,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           source: "., !node_modules"
-          target: "app/rentex-concessionaire"
+          target: "app/rentx-concessionaire"
           
       - name: Update API
         uses: appleboy/ssh-action@master
@@ -44,7 +44,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ~/app/rentex-concessionaire/backend
+            cd ~/app/rentx-concessionaire
             docker-compose build --no-cache --force-rm
             docker-compose up -d
             docker image prune -a -f
