@@ -9,6 +9,9 @@ tmp/*
 !/tmp/avatar/.gitkeep
 !/tmp/cars/.gitkeep
 
+yarn.lock
+yarn-error.log
+
 .env
 
 # ormconfig.json
