@@ -4,12 +4,12 @@ interface IOptions {
   host: string;
 }
 
-export default async (host = "database"): Promise<Connection> => {
+export default async (host = "rentxdatabase"): Promise<Connection> => {
   const defaultOptions = await getConnectionOptions();
 
   return createConnection(
     Object.assign(defaultOptions, {
-      host: process.env.NODE_ENV === 'test' ? '172.22.0.2' : host,
+      host: process.env.NODE_ENV === 'test' ? 'rentxdatabase' : host,
       database: process.env.NODE_ENV === 'test' ? 'rentx_test' : defaultOptions.database
     })
   )
