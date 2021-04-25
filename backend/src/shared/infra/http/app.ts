@@ -30,7 +30,7 @@ app.use("/cars", express.static(`${upload.tmpFolder}/cars`));
 
 app.use(cors());
 
-app.use("/rentxserver" + router);
+app.use("/rentxserver", router);
 
 // errors
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
